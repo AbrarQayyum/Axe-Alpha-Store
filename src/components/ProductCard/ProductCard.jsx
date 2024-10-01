@@ -32,7 +32,7 @@ const ProductCard = ({ title, productItem }) => {
       <div className="product-details">
         <h3 onClick={() => handelClick()}>{productItem.productName}</h3>
         <div className="rate">
-          <i className="fa fa-star"></i>
+          <i className="fa fa-star"></i>  
           <i className="fa fa-star"></i>
           <i className="fa fa-star"></i>
           <i className="fa fa-star"></i>

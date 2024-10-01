@@ -1,34 +1,38 @@
 import { useEffect } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row, Button } from "react-bootstrap"; // Import Button here
 import { useDispatch, useSelector } from "react-redux";
 import {
   addToCart,
   decreaseQty,
   deleteProduct,
 } from "../app/features/cart/cartSlice";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const { cartList } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-  // middlware to localStorage
+  const navigate = useNavigate();
+
   const totalPrice = cartList.reduce(
     (price, item) => price + item.qty * item.price,
     0
   );
+
   useEffect(() => {
     window.scrollTo(0, 0);
-    // if(CartItem.length ===0) {
-    //   const storedCart = localStorage.getItem("cartItem");
-    //   setCartItem(JSON.parse(storedCart));
-    // }
   }, []);
+
+  const handleProceedOrder = () => {
+    navigate("/proceed-order");
+  };
+
   return (
     <section className="cart-items">
       <Container>
         <Row className="justify-content-center">
           <Col md={8}>
             {cartList.length === 0 && (
-              <h1 className="no-items product">No Items are add in Cart</h1>
+              <h1 className="no-items product">No Items are added in Cart</h1>
             )}
             {cartList.map((item) => {
               const productQty = item.price * item.qty;
@@ -79,10 +83,17 @@ const Cart = () => {
           <Col md={4}>
             <div className="cart-total">
               <h2>Cart Summary</h2>
-              <div className=" d_flex">
+              <div className="d_flex">
                 <h4>Total Price :</h4>
                 <h3>{totalPrice}.00 Pkr</h3>
-              </div>
+              </div> <br></br>
+              <Button 
+                className="mt-14" // Margin top for spacing
+                variant="primary" 
+                onClick={handleProceedOrder}
+              >
+                Proceed to Payment
+              </Button>
             </div>
           </Col>
         </Row>

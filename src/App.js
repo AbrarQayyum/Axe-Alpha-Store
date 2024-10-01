@@ -6,10 +6,14 @@ import Footer from "./components/Footer/Footer";
 import Loader from "./components/Loader/Loader";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 const Home = lazy(() => import("./pages/Home"));
 const Shop = lazy(() => import("./pages/Shop"));
 const Cart = lazy(() => import("./pages/Cart"));
 const Product = lazy(() => import("./pages/Product"));
+const ProceedOrder = lazy(() => import("./pages/ProceedOrder")); 
+const Invoice = lazy(() => import("./pages/Invoice")); // Import the Invoice component
+
 function App() {
   return (
     <Suspense fallback={<Loader />}>
@@ -31,6 +35,8 @@ function App() {
           <Route path="/shop" element={<Shop />} />
           <Route path="/shop/:id" element={<Product />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/proceed-order" element={<ProceedOrder />} /> 
+          <Route path="/invoice" element={<Invoice />} /> {/* Add the Invoice route */}
         </Routes>
         <Footer />
       </Router>
